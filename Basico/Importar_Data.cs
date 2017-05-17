@@ -698,6 +698,7 @@ namespace Basico
         //static string conexion_tropi = "Server=10.10.10.206;Database=BdTropicalza;UID=sa;Password=Bata2013";
         #endregion
 
-        
+        #region<comprobando update git>
+        #endregion
     }
 }
