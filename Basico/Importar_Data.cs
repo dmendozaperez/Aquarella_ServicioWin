@@ -12,7 +12,7 @@ namespace Basico
 {
    public class Importar_Data
     {       
-        #region <IMPORTAR DATOS AL SQL>
+        #region <IMPORTAR DATOS AL SQL INFO>
         public static void ejecutatarea(ref string verror,ref string verror_procesos)
         {
             DataSet dstienda = null;
