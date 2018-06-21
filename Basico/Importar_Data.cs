@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.IO;
 using System.IO.Compression;
 using ICSharpCode.SharpZipLib.Zip;
+using PrestaShopUpd;
+
 namespace Basico
 {
    public class Importar_Data
@@ -43,6 +45,9 @@ namespace Basico
                         for (Int32 itienda = 0; itienda < dttienda.Rows.Count; ++itienda)
                         {
                             string carpetatd = carpetadbf + dttienda.Rows[itienda]["CARPETAT"].ToString();
+
+                            if (!Directory.Exists(@carpetatd)) Directory.CreateDirectory(@carpetatd); 
+
                             //verror_procesos = carpetatd;
                             if ((Directory.Exists(@carpetatd)))
                             {
@@ -51,10 +56,13 @@ namespace Basico
 
                                 string carpetatienda = carpetadbf + dttienda.Rows[itienda]["CARPETAT"].ToString() + "\\" + ruta_wx;
                                 string carpetadesde = carpeta_desde_f + dttienda.Rows[itienda]["CARPETAT"].ToString() + "\\" + ruta_wx;
+
+                                string _ec = dttienda.Rows[itienda]["EC"].ToString();
+
                                 //string carpetacopy = carpetatienda + "\\BkDbf\\";
 
                                 //copiar archivo de un servidor al otro para invocar datos desde el mismo sql server local
-                                copiar_archivo(carpetadesde, carpetatienda);
+                                copiar_archivo(carpetadesde, carpetatienda, _ec);
                                 //
                                 string centidad = dttienda.Rows[itienda]["CODIGOENT"].ToString();
                                 string[] filesrar;
@@ -110,43 +118,7 @@ namespace Basico
 
                                         verror_procesos += verror;
                                     }
-                                    //byte[] xml = File.ReadAllBytes(filesrar[irar].ToString());
-                                    //Boolean validarar = DescromprimirZip(filesrar[irar].ToString(), carpetatienda);
-                                    //UnzipFile(filesrar[irar].ToString(),)
-                                        //if (!(validarar))
-                                        //{                                        
-                                        //    verror = "Error al descomprimir el archivo " + filesrar[irar].ToString();
-                                        //    //sb_archivoserror(name, filesrar[irar].ToString(), 1);
-                                        //    vejecuta_usp = 0;
-                                        //    //return;
-                                        //}
-                                        //else
-                                        //{
-                                        //    actualizardata(carpetatd, centidad, name, ref verror);
-                                        //    //sb_archivoserror(name, filesrar[irar].ToString(), 2);
-                                        //    vejecuta_usp = 1;
-                                        //}
-                                        //if (verror.Length > 0)
-                                        //{
-                                        //    if (vejecuta_usp == 1)
-                                        //    {
-                                        //        //return;
-                                        //    }                                       
-                                        //}
-                                        //else
-                                        //{
-                                        //    //if (!(Directory.Exists(carpetacopy)))
-                                        //    //{
-                                        //    //    System.IO.Directory.CreateDirectory(@carpetacopy);
-                                        //    //}
-                                        //    //string vrutacopy = carpetacopy + nombrearchivo;
-                                        //    //if (System.IO.File.Exists(vrutacopy))
-                                        //    //{
-                                        //    //    System.IO.File.Delete(vrutacopy);
-                                        //    //}
-                                        //    //System.IO.File.Move(filesrar[irar].ToString(), vrutacopy);
-                                        //    //System.IO.File.Delete(filesrar[irar].ToString());
-                                        //}                                   
+                                                        
                                     }                              
                             }
                             else
@@ -171,151 +143,7 @@ namespace Basico
                 }
                 #endregion
 
-                #region<REGION DE AQUARELLA TROPICALZA>
-                verror = "";
-                //dstienda = dsgettienda_tropi(ref verror);
-                dttienda = dstienda.Tables[0];
-                dtrutadbf = dstienda.Tables[1];
-                dttipocarpeta = dstienda.Tables[2];
-                dtruta_desde = dstienda.Tables[3];
-                if (dstienda != null)
-                {
-                    string ruta_wx = dttipocarpeta.Rows[0]["carpeta"].ToString();
-                    if (dttienda.Rows.Count > 0)
-                    {
-                        string carpetadbf = dtrutadbf.Rows[0]["RUTADBF"].ToString();
-                        string carpeta_desde_f = dtruta_desde.Rows[0]["RUTADBF"].ToString();
-                        for (Int32 itienda = 0; itienda < dttienda.Rows.Count; ++itienda)
-                        {
-                            string carpetatd = carpetadbf;//+ dttienda.Rows[itienda]["CARPETAT"].ToString();
-                            //verror_procesos = carpetatd;
-                            if ((Directory.Exists(@carpetatd)))
-                            {
-                                //verror_procesos = carpetatd;
-                                //System.IO.Directory.CreateDirectory(@carpetatd);
-
-                                string carpetatienda = carpetadbf;//+ dttienda.Rows[itienda]["CARPETAT"].ToString() + "\\" + ruta_wx;
-                                string carpetadesde = carpeta_desde_f + dttienda.Rows[itienda]["CARPETAT"].ToString() + "\\" + ruta_wx;
-                                //string carpetacopy = carpetatienda + "\\BkDbf\\";
-
-                                //copiar archivo de un servidor al otro para invocar datos desde el mismo sql server local
-                                //copiar_archivo(carpetadesde, carpetatienda);
-                                //
-                                string centidad = dttienda.Rows[itienda]["CODIGOENT"].ToString();
-                                string[] filesrar;
-                                filesrar = System.IO.Directory.GetFiles(@carpetatienda, "*.dbf*");
-                                if (filesrar.Length > 0)
-                                {
-                                    //actualizardata_tropi(carpetatienda, centidad, "", ref verror);
-                                    //carpetatienda = carpetatienda + "\\DBF";
-                                    //if (!(Directory.Exists(@carpetatienda)))
-                                    //{
-                                    //    System.IO.Directory.CreateDirectory(@carpetatienda);
-                                    //}
-                                    //for (Int32 irar = 0; irar < filesrar.Length; ++irar)
-                                    //{
-
-                                    //    verror = "";
-                                    //    string name = System.IO.Path.GetFileNameWithoutExtension(@filesrar[irar].ToString());
-                                    //    string nombrearchivo = System.IO.Path.GetFileName(@filesrar[irar].ToString());
-                                    //    //seleccionar la carpeta dbf para borrar
-                                    //    string[] filesborrar;
-                                    //    filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
-
-                                    //    //borrar archivo de la carpeta dbf de td
-                                    //    for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
-                                    //    {
-                                    //        System.IO.File.Delete(@filesborrar[iborrar].ToString());
-                                    //    }
-                                    //    //ahora descomprimimos los archivos rar                                      
-                                    //    verror = descomprimir(@filesrar[irar].ToString(), @carpetatienda);
-
-                                    //    if (verror.Length == 0)
-                                    //    {
-                                    //        //string _archivo_fac = carpetatienda  +"\\FFACTC.DBF";
-
-                                    //        //en este verifico si el dbf existe
-                                    //        //if (System.IO.File.Exists(@_archivo_fac))
-                                    //        //{
-                                    //        actualizardata(carpetatienda, centidad, name, ref verror);
-                                    //        //}
-
-                                    //        //borrar el archivo zip
-                                    //        if (verror.Length == 0)
-                                    //        {
-                                    //            if (System.IO.File.Exists(@filesrar[irar].ToString()))
-                                    //            {
-                                    //                System.IO.File.Delete(@filesrar[irar].ToString());
-                                    //            }
-                                    //        }
-                                    //    }
-                                    //    else
-                                    //    {
-
-                                    //    }
-
-                                    //    verror_procesos += verror;
-                                    //}
-                                    //byte[] xml = File.ReadAllBytes(filesrar[irar].ToString());
-                                    //Boolean validarar = DescromprimirZip(filesrar[irar].ToString(), carpetatienda);
-                                    //UnzipFile(filesrar[irar].ToString(),)
-                                    //if (!(validarar))
-                                    //{                                        
-                                    //    verror = "Error al descomprimir el archivo " + filesrar[irar].ToString();
-                                    //    //sb_archivoserror(name, filesrar[irar].ToString(), 1);
-                                    //    vejecuta_usp = 0;
-                                    //    //return;
-                                    //}
-                                    //else
-                                    //{
-                                    //    actualizardata(carpetatd, centidad, name, ref verror);
-                                    //    //sb_archivoserror(name, filesrar[irar].ToString(), 2);
-                                    //    vejecuta_usp = 1;
-                                    //}
-                                    //if (verror.Length > 0)
-                                    //{
-                                    //    if (vejecuta_usp == 1)
-                                    //    {
-                                    //        //return;
-                                    //    }                                       
-                                    //}
-                                    //else
-                                    //{
-                                    //    //if (!(Directory.Exists(carpetacopy)))
-                                    //    //{
-                                    //    //    System.IO.Directory.CreateDirectory(@carpetacopy);
-                                    //    //}
-                                    //    //string vrutacopy = carpetacopy + nombrearchivo;
-                                    //    //if (System.IO.File.Exists(vrutacopy))
-                                    //    //{
-                                    //    //    System.IO.File.Delete(vrutacopy);
-                                    //    //}
-                                    //    //System.IO.File.Move(filesrar[irar].ToString(), vrutacopy);
-                                    //    //System.IO.File.Delete(filesrar[irar].ToString());
-                                    //}                                   
-                                }
-                            }
-                            else
-                            {
-                                //verror_procesos = carpetatd;
-                            }
-
-                        }
-                        //actualizar clientes intranet
-
-                        //actualiza_cliente_intranet_tropi(ref verror);
-                        //enviar ventas 
-                        //***************AQUARELLLA
-                        //enviar_ventas_tropicalza(ref verror);
-
-                        //AQUARELLA TROPICALA
-                        //enviar_ventas_tropicalza(ref verror);
-
-                        verror_procesos += verror;
-                        //_*****************
-                    }
-                }
-                #endregion
+              
 
             }
             catch (Exception ex)
@@ -425,10 +253,17 @@ namespace Basico
         //    }
         //    if (cn.State == ConnectionState.Open) cn.Close();
         //}
-       private static void copiar_archivo(string _ruta_desde,string _ruta_hasta)
+       private static void copiar_archivo(string _ruta_desde,string _ruta_hasta,string _ec)
         {
            try
            {
+                string ruta_ec = "";
+                if (_ec.Length>0)
+                {
+                    ruta_ec = _ruta_hasta + "\\" + _ec;
+                    if (!Directory.Exists(@ruta_ec)) Directory.CreateDirectory(@ruta_ec);
+                } 
+
                string[] filesrar;
                filesrar = System.IO.Directory.GetFiles(@_ruta_desde, "*.*");
                for (Int32 b = 0; b < filesrar.Length; ++b)
@@ -440,11 +275,19 @@ namespace Basico
                        string _archivo_copiar = infofile.Name;
                        string _ruta_copiar_error = _ruta_hasta + "\\" + _archivo_copiar;
                        File.Copy(archivo_borrar, _ruta_copiar_error, true);
+                       
+                        /*en este caso quiere decir que va realizar una copia para ecommerce*/
+                       if (_ec.Length>0)
+                        {
+                            string _ruta_copia_ec = _ruta_hasta + "\\" + _ec + "\\" + _archivo_copiar;
+                            File.Copy(archivo_borrar, _ruta_copia_ec, true);
+                        }  
+
                        File.Delete(archivo_borrar);
                    }
                }
            }
-           catch
+           catch(Exception exc)
            {
 
            }
@@ -562,6 +405,7 @@ namespace Basico
         //    return ds;
         //}
 
+       
         private static void actualizardata(string carpeta, string centidad, string name, ref string verror)
         {
             string sqlquery = "[USP_Actualizar_Bata_Parameter]";
@@ -571,6 +415,7 @@ namespace Basico
             //DataTable dt = null;
             try
             {
+
                 cn = new SqlConnection(conexion);
                 if (cn.State == 0) cn.Open();
                 cmd = new SqlCommand(sqlquery, cn);
@@ -591,7 +436,8 @@ namespace Basico
                     verror = "error de lectura dbf;";
                 }
             }
-            if (cn.State==ConnectionState.Open) cn.Close();        
+            if (cn!=null)
+                if (cn.State==ConnectionState.Open) cn.Close();        
         }
 
         //private static void actualizardata_tropi(string carpeta, string centidad, string name, ref string verror)
@@ -672,7 +518,28 @@ namespace Basico
            }
            if (cn.State==ConnectionState.Open) cn.Close();
        }
-       public static void actualiza_servicio(Int32 _valor_service)
+        public static void insertar_error_service_ec(string _error)
+        {
+            string sqlquery = "USP_Insertar_Errores_Service";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cn = new SqlConnection(conexion_ecommer);
+                if (cn.State == 0) cn.Open();
+                cmd = new SqlCommand(sqlquery, cn);
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@error", _error);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            if (cn.State == ConnectionState.Open) cn.Close();
+        }
+        public static void actualiza_servicio(Int32 _valor_service)
         {
             string sqlquery = "USP_Actualizar_ServiceWin";
             SqlConnection cn = null;
@@ -696,9 +563,228 @@ namespace Basico
         #region<METODO DE CONEXION>
         static string conexion = "Server=10.10.10.207;Database=BdAquarella;UID=sa;Password=Bata2013";
         //static string conexion_tropi = "Server=10.10.10.206;Database=BdTropicalza;UID=sa;Password=Bata2013";
+        static string conexion_ecommer = "Server=ecommerce.bgr.pe;Database=BD_ECOMMERCE;UID=dmendoza;Password=Bata2013";
         #endregion
 
-        #region<comprobando update git>
+        #region<METODO PARA TRANSACCIONES DE ECCOMERCE>
+        private static DataTable get_mov_ecommerce(string carpeta, string centidad, string name, ref string verror)
+        {
+            DataTable dt = null;
+            string sqlquery = "[USP_GET_MOV_ECOMMERCE]";
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(conexion))
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlquery, cn))
+                    {
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@CARPETA", carpeta);
+                        cmd.Parameters.AddWithValue("@C_ENTID", centidad);
+                        cmd.Parameters.AddWithValue("@NAME", name);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            dt = new DataTable();
+                            da.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                dt = null;
+                verror = exc.Message; ;
+            }
+            return dt;
+        }
+        private static void actualizardata_ecommerce(string carpeta, string centidad, string name, ref string verror)
+        {
+            string sqlquery = "[USP_ImportarMovEcommerce]";
+            SqlConnection cn = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter da = null;
+            DataTable dtmov = null;
+            try
+            {
+
+                dtmov = get_mov_ecommerce(carpeta,centidad,name, ref verror);
+
+                if (verror.Length==0)
+                { 
+                    if (dtmov.Rows.Count>0)
+                    { 
+                        cn = new SqlConnection(conexion_ecommer);
+                        if (cn.State == 0) cn.Open();
+                        cmd = new SqlCommand(sqlquery, cn);
+                        cmd.CommandTimeout = 0;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@tabla_temp", dtmov);
+                       
+                        cmd.ExecuteNonQuery();
+
+                        /*envia movimiento a prestashop*/
+                        string _error = "";
+                        ActStock eje = new ActStock();
+                        _error = eje.EjecutaStock();
+                        if (_error.Trim().Length > 0)
+                        {
+                            Importar_Data.insertar_error_service_ec(_error);
+                        }
+                        /**********************************/
+                    }
+                }
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                verror = ex.Message;
+                if (verror.Trim().Length == 0)
+                {
+                    verror = "error de lectura dbf;";
+                }
+            }
+            if (cn!=null)
+                if (cn.State == ConnectionState.Open) cn.Close();
+        }
+        public static void ejecutatarea_ecc(ref string verror, ref string verror_procesos)
+        {
+            DataSet dstienda = null;
+            DataTable dttienda = null;
+            DataTable dtrutadbf = null;
+            DataTable dttipocarpeta = null;
+            DataTable dtruta_desde = null;
+            try
+            {
+                #region<REGION DE ECOMMERCE>
+
+                verror = "";
+                dstienda = dsgettienda(ref verror);
+                dttienda = dstienda.Tables[0];
+                dtrutadbf = dstienda.Tables[1];
+                dttipocarpeta = dstienda.Tables[2];
+                dtruta_desde = dstienda.Tables[3];
+                if (dstienda != null)
+                {
+                    string ruta_wx = dttipocarpeta.Rows[0]["carpeta"].ToString();
+                    if (dttienda.Rows.Count > 0)
+                    {
+
+
+
+                        string carpetadbf = dtrutadbf.Rows[0]["RUTADBF"].ToString();
+                        string carpeta_desde_f = dtruta_desde.Rows[0]["RUTADBF"].ToString();
+                        for (Int32 itienda = 0; itienda < dttienda.Rows.Count; ++itienda)
+                        {
+                            string carpetatd = carpetadbf + dttienda.Rows[itienda]["CARPETAT"].ToString();
+                            //verror_procesos = carpetatd;
+                            if ((Directory.Exists(@carpetatd)))
+                            {
+                                //verror_procesos = carpetatd;
+                                //System.IO.Directory.CreateDirectory(@carpetatd);
+
+                                string ec = (dttienda.Rows[itienda]["ec"].ToString().Length==0)?"EC": dttienda.Rows[itienda]["ec"].ToString();
+
+                                string carpetatienda = carpetadbf + dttienda.Rows[itienda]["CARPETAT"].ToString() + "\\" + ruta_wx + "\\" + ec;
+                                string carpetadesde = carpeta_desde_f + dttienda.Rows[itienda]["CARPETAT"].ToString() + "\\" + ruta_wx;
+                                //string carpetacopy = carpetatienda + "\\BkDbf\\";
+
+                                //copiar archivo de un servidor al otro para invocar datos desde el mismo sql server local
+                                //copiar_archivo(carpetadesde, carpetatienda);
+                                //
+                                string centidad = dttienda.Rows[itienda]["CODIGOENT"].ToString();
+                                string[] filesrar;
+                                filesrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+                                if (filesrar.Length > 0)
+                                {
+                                    carpetatienda = carpetatienda + "\\DBF";
+                                    if (!(Directory.Exists(@carpetatienda)))
+                                    {
+                                        System.IO.Directory.CreateDirectory(@carpetatienda);
+                                    }
+                                    for (Int32 irar = 0; irar < filesrar.Length; ++irar)
+                                    {
+
+                                        verror = "";
+                                        string name = System.IO.Path.GetFileNameWithoutExtension(@filesrar[irar].ToString());
+                                        string nombrearchivo = System.IO.Path.GetFileName(@filesrar[irar].ToString());
+                                        //seleccionar la carpeta dbf para borrar
+                                        string[] filesborrar;
+                                        filesborrar = System.IO.Directory.GetFiles(@carpetatienda, "*.*");
+
+                                        //borrar archivo de la carpeta dbf de td
+                                        for (Int32 iborrar = 0; iborrar < filesborrar.Length; ++iborrar)
+                                        {
+                                            System.IO.File.Delete(@filesborrar[iborrar].ToString());
+                                        }
+                                        //ahora descomprimimos los archivos rar                                      
+                                        verror = descomprimir(@filesrar[irar].ToString(), @carpetatienda);
+
+                                        if (verror.Length == 0)
+                                        {
+                                            //string _archivo_fac = carpetatienda  +"\\FFACTC.DBF";
+
+                                            //en este verifico si el dbf existe
+                                            //if (System.IO.File.Exists(@_archivo_fac))
+                                            //{
+                                            actualizardata_ecommerce(carpetatienda, centidad, name, ref verror);
+                                            //}
+                                            //return;
+                                            //borrar el archivo zip
+                                            if (verror.Length == 0)
+                                            {
+                                                if (System.IO.File.Exists(@filesrar[irar].ToString()))
+                                                {
+                                                    System.IO.File.Delete(@filesrar[irar].ToString());
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                        }
+
+                                        verror_procesos += verror;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                //verror_procesos = carpetatd;
+                            }
+
+                        }
+                        //actualizar clientes intranet
+
+                        //actualiza_cliente_intranet(ref verror);
+                        //enviar ventas 
+                        //***************AQUARELLLA
+                        //enviar_ventas(ref verror);
+
+                        //AQUARELLA TROPICALA
+                        //enviar_ventas_tropicalza(ref verror);
+
+                        verror_procesos += verror;
+                        //_*****************
+                    }
+                }
+                #endregion
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                verror_procesos += "==>>" + ex.Message;
+
+            }
+        }
         #endregion
     }
 }

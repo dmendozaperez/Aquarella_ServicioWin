@@ -47,6 +47,10 @@
       <Project>{7bf46e74-2791-476a-9a15-f5b2f5fd49c7}</Project>
       <Name>ICSharpCode.SharpZLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrestaShopUpd\PrestaShopUpd.csproj">
+      <Project>{1349ff3a-778d-4386-a874-c7796fe6bb7b}</Project>
+      <Name>PrestaShopUpd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

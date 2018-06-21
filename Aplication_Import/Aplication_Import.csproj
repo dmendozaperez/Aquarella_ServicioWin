@@ -82,6 +82,10 @@
       <Project>{cbbfd7cd-b36c-4370-bf80-24d54c2abe5a}</Project>
       <Name>Basico</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrestaShopUpd\PrestaShopUpd.csproj">
+      <Project>{1349ff3a-778d-4386-a874-c7796fe6bb7b}</Project>
+      <Name>PrestaShopUpd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

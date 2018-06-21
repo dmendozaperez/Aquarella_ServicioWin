@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplication_Import", "Aplication_Import\Aplication_Import.csproj", "{D10E9248-A8CF-45CE-A924-6D2BA73ED17A}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service_Importar_Data", "Service_Importar_Data\Service_Importar_Data.csproj", "{7C972A7D-27E9-4271-963D-C6236272CE2D}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Install_Import_Data", "Install_Import_Data\Install_Import_Data.vdproj", "{6C9282E9-97BB-4FA1-BB6A-8F555BD10F42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrestaShopUpd", "PrestaShopUpd\PrestaShopUpd.csproj", "{1349FF3A-778D-4386-A874-C7796FE6BB7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,16 @@ Global
 		{6C9282E9-97BB-4FA1-BB6A-8F555BD10F42}.DVD-5|Any CPU.ActiveCfg = Debug
 		{6C9282E9-97BB-4FA1-BB6A-8F555BD10F42}.Release|Any CPU.ActiveCfg = Release
 		{6C9282E9-97BB-4FA1-BB6A-8F555BD10F42}.SingleImage|Any CPU.ActiveCfg = Release
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{1349FF3A-778D-4386-A874-C7796FE6BB7B}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
