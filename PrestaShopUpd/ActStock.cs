@@ -102,7 +102,8 @@ namespace PrestaShopUpd
         public void ActualizaStocks(DataTable precios)
         {
             //Valida con Productos Existentes
-            string queryvalida = "Select Distinct replace(replace(reference,'-',''),'_','') as reference From ps_product_attribute";
+            //string queryvalida = "Select Distinct replace(replace(reference,'-',''),'_','') as reference From ps_product_attribute";
+            string queryvalida = "CALL USP_EXISTE_PROD();";
             MySqlCommand cmd = new MySqlCommand(queryvalida, mysql);
             MySqlDataAdapter returnVal = new MySqlDataAdapter(queryvalida, mysql);
             DataTable Productos = new DataTable();
