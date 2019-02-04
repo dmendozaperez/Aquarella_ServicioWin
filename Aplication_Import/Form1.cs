@@ -36,7 +36,7 @@ namespace Aplication_Import
                 //MessageBox.Show(_error);
 
                 //ejecutar la importacion de data
-                //Importar_Data.ejecutatarea(ref _error, ref _error_tarea);
+                Importar_Data.ejecutatarea(ref _error, ref _error_tarea);
                 Importar_Data.ejecutatarea_ecc(ref _error, ref _error_tarea);
                 //Importar_Data.ejecutatarea(ref _error, ref _error_tarea);
                 //********************

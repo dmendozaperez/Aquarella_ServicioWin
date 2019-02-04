@@ -62,7 +62,7 @@ namespace Basico
                                 //string carpetacopy = carpetatienda + "\\BkDbf\\";
 
                                 //copiar archivo de un servidor al otro para invocar datos desde el mismo sql server local
-                                copiar_archivo(carpetadesde, carpetatienda, _ec);
+                                copiar_archivo(carpetadesde, carpetatienda, _ec,ref verror_procesos);
                                 //
                                 string centidad = dttienda.Rows[itienda]["CODIGOENT"].ToString();
                                 string[] filesrar;
@@ -253,7 +253,7 @@ namespace Basico
         //    }
         //    if (cn.State == ConnectionState.Open) cn.Close();
         //}
-       private static void copiar_archivo(string _ruta_desde,string _ruta_hasta,string _ec)
+       private static void copiar_archivo(string _ruta_desde,string _ruta_hasta,string _ec,ref string verror_procesos)
         {
            try
            {
@@ -289,7 +289,7 @@ namespace Basico
            }
            catch(Exception exc)
            {
-
+                verror_procesos = exc.Message;
            }
         }
 
@@ -561,9 +561,9 @@ namespace Basico
         }
         #endregion
         #region<METODO DE CONEXION>
-        static string conexion = "Server=10.10.10.207;Database=BdAquarella;UID=sa;Password=Bata2013";
+        static string conexion = "Server=172.28.7.14;Database=BdAquarella;UID=sis_aquarella;Password=Bata2018**";
         //static string conexion_tropi = "Server=10.10.10.206;Database=BdTropicalza;UID=sa;Password=Bata2013";
-        static string conexion_ecommer = "Server=ecommerce.bgr.pe;Database=BD_ECOMMERCE;UID=dmendoza;Password=Bata2013";
+        static string conexion_ecommer = "Server=172.28.7.14;Database=BD_ECOMMERCE;UID=ecommerce;Password=Bata2018.*@=?++";
         #endregion
 
         #region<METODO PARA TRANSACCIONES DE ECCOMERCE>
